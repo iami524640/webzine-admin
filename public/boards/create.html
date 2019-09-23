@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>INSPINIA | Main view</title>
+
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/font-awesome/css/font-awesome.css" rel="stylesheet">
+
+    <link href="/css/animate.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
+
+    <!--추가 스타일-->
+
+</head>
+
+<body>
+
+    <div id="app">
+        <div id="wrapper">
+
+            <!--좌측 메뉴 영역-->
+            <nav class="navbar-default navbar-static-side" role="navigation">
+                <div class="sidebar-collapse">
+                    <ul class="nav metismenu" id="side-menu">
+                        <li class="nav-header">
+                            <div class="dropdown profile-element">
+                                <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                                    <span class="block m-t-xs font-bold">Example user</span>
+                                    <span class="text-muted text-xs block">menu <b class="caret"></b></span>
+                                </a>
+                                <ul class="dropdown-menu animated fadeInRight m-t-xs">
+                                    <li><a class="dropdown-item" href="login.html">Logout</a></li>
+                                </ul>
+                            </div>
+                            <div class="logo-element">
+                                IN+
+                            </div>
+                        </li>
+                 
+                        <li class="active">
+                            <a href="/boards/list.html"><i class="fa fa-th-large"></i> <span class="nav-label">게시판관리</span></a>
+                        </li>
+    
+                        <li>
+                            <a href="/articles/list.html"><i class="fa fa-th-large"></i> <span class="nav-label">게시글관리</span> </a>
+                        </li>
+    
+                        <li>
+                            <a href="/users/list.html"><i class="fa fa-th-large"></i> <span class="nav-label">사용자관리</span> </a>
+                        </li>
+                    </ul>
+
+                </div>
+            </nav>
+
+            <!--우측 영역-->
+            <div id="page-wrapper" class="gray-bg">
+
+                <!--우측 상단 영역 -->
+                <div class="row border-bottom">
+                    <nav class="navbar navbar-static-top white-bg" role="navigation" style="margin-bottom: 0">
+                        <div class="navbar-header">
+                            <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i
+                                    class="fa fa-bars"></i> </a>
+                            <form role="search" class="navbar-form-custom" method="post" action="#">
+                                <div class="form-group">
+                                    <input type="text" placeholder="Search for something..." class="form-control"
+                                        name="top-search" id="top-search">
+                                </div>
+                            </form>
+                        </div>
+                        <ul class="nav navbar-top-links navbar-right">
+                            <li>
+                                <a href="#">
+                                    <i class="fa fa-sign-out"></i> Log out
+                                </a>
+                            </li>
+                        </ul>
+
+                    </nav>
+                </div>
+
+                <!--우측 콘텐츠 헤더영역 -->
+                <div class="row wrapper border-bottom white-bg page-heading">
+                    <div class="col-lg-10">
+                        <h2>관리자정보관리</h2>
+                        <ol class="breadcrumb">
+                            <li>
+                                <a href="/">Home</a>
+                            </li>
+                            <li>
+                                <a>게시판정보등록</a>
+                            </li>
+                            <li class="active">
+                                <strong>신규등록</strong>
+                            </li>
+                        </ol>
+                    </div>
+                    <div class="col-lg-2">
+
+                    </div>
+                </div>
+
+                <!--우측 콘텐츠 영역 -->
+                <div class="wrapper wrapper-content">
+                    <div class="ibox-content m-b-sm border-bottom">
+
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label class="control-label">게시판명</label>
+                                    <input type="text" v-model="board.boardname" ref="boardname" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label class="control-label">게시판설명</label>
+                                    <textarea class="form-control"  v-model="board.desc" ref="desc" rows="10" cols="5"></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label class="control-label">사용여부</label>
+
+                                    <select class="form-control"  v-model="board.useyn" ref="useyn">
+                                        <option value="">선택</option>
+                                        <option value="true">사용</option>
+                                        <option value="false">사용안함</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="text-center">
+                            <button type="button" v-on:click="saveData" class="btn btn-primary">저장</button>
+                            <a href="#" class="btn btn-info">목록</a>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!--우측 하단 풋터 영역-->
+                <div class="footer">
+                    <div class="pull-right">
+                        10GB of <strong>250GB</strong> Free.
+                    </div>
+                    <div>
+                        <strong>Copyright</strong> Example Company &copy; 2014-2018
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- Mainly scripts -->
+    <script src="/js/jquery-3.1.1.min.js"></script>
+    <script src="/js/popper.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+    <script src="/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+    <!-- Custom and plugin javascript -->
+    <script src="/js/inspinia.js"></script>
+    <script src="/js/plugins/pace/pace.min.js"></script>
+
+
+    <!--추가 스크립트-->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <script>
+
+        var app = new Vue({
+            el: '#app', //웹페이지내 마운트될 html요소지정
+            data: {
+                board: {
+                    boardname:'',
+                    desc:'',
+                    useyn:'',
+                    createduid:0,
+                }
+            },
+            methods: {
+
+                //저장버튼이 클릭되면 데이터 저장
+                saveData: function () {
+
+                    if(this.board.boardname == ""){
+                        alert("게시판명을 입력해주세요.");
+                        //ref명을 이용해 게시판명 입력 UI 요소를 조회한다.
+                        var txtBoardName = this.$refs.boardname;
+                        //게시판명 입력 텍스트박스에 마우스 포커스를 맞춘다.
+                        txtBoardName.focus();
+                        return false;
+                    }
+
+
+                    if(this.board.desc == ""){
+                        alert("게시판 설명을 입력해주세요.");
+                        this.$refs.desc.focus();
+                        return false;
+                    }
+
+                    if(this.board.useyn == ""){
+                        alert("게시판 사용여부를 선택해주세요.");
+                        this.$refs.useyn.focus();
+                        return false;
+                    }
+
+
+                    axios.post('/boards',this.board)
+                    .then(function(response){
+                        console.log(response.data);
+                        //등록된 데이터를 리턴값으로 제공한다.
+
+                        //목록페이지로 이동
+                        location.href = "/boards/list.html";
+
+                        //등록된 데이터 수정페이지로 이동코자할때
+                        //location.href = "/boards/modify.html?id="+response.data.id;
+
+                    }.bind(this))
+                    .catch(function(err){
+                        console.log(err);
+                    })
+                }
+            }
+
+        });
+
+    </script>
+
+</body>
+
+</html>
