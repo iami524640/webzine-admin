@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>INSPINIA | Login</title>
+
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/font-awesome/css/font-awesome.css" rel="stylesheet">
+
+    <link href="/css/animate.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
+
+</head>
+
+<body class="gray-bg">
+
+    <div class="middle-box text-center loginscreen animated fadeInDown">
+        <div id="app">
+            <div>
+
+                <h1 class="logo-name">IN+</h1>
+
+            </div>
+            <h3>Welcome to IN+</h3>
+
+            <p>Login in. To see it in action.</p>
+            <form class="m-t" role="form">
+                <div class="form-group">
+                    <input type="email" v-model="user.email" ref="email" class="form-control" placeholder="Username" required="">
+                </div>
+                <div class="form-group">
+                    <input type="password" v-model="user.userpwd" ref="pwd" class="form-control" placeholder="Password" required="">
+                </div>
+                <button type="button" v-on:click="login" class="btn btn-primary block full-width m-b">Login</button>
+
+                <a href="#"><small>Forgot password?</small></a>
+                <p class="text-muted text-center"><small>Do not have an account?</small></p>
+                <a class="btn btn-sm btn-white btn-block" href="register.html">Create an account</a>
+            </form>
+            <p class="m-t"> <small>Inspinia we app framework base on Bootstrap 3 &copy; 2014</small> </p>
+        </div>
+    </div>
+
+    <!-- Mainly scripts -->
+    <script src="/js/jquery-3.1.1.min.js"></script>
+    <script src="/js/popper.min.js"></script>
+    <script src="/js/bootstrap.js"></script>
+
+     <!--추가 스크립트-->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+
+    <script>
+
+        var app = new Vue({
+            el: '#app', //웹페이지내 마운트될 html요소지정
+            data: {
+                user: {
+                    email:'',
+                    userpwd:'',
+                }
+            },
+            methods: {
+
+                //로그인 처리 메소드
+                login: function () {
+    
+                    if(this.user.email == ""){
+                        alert("로그인 메일주소를 입력해주세요.");
+                        this.$refs.email.focus();
+                        return false;
+                    }
+                    
+                    if(this.user.userpwd == ""){
+                        alert("로그인 암호를 입력해주세요.");
+                        this.$refs.pwd.focus();
+                        return false;
+                    }
+    
+                    axios.post('/users/tlogin',this.user)
+                    .then(function(response){
+                        console.log(response.data);
+    
+                        //정상 로그인되면 메인 페이지로 이동처리
+                        if(response.data.code == "200"){
+
+                            console.log("서버발급토큰값:",response.data.result);
+
+                            //로컬스토리지에 토큰값 저장하기
+                            //브라우저를 닫아도 스토리지값은 유지
+                            //웹사이트를 모두 닫아도 토큰기반 로그인정보를 유지하고 싶을때
+                            localStorage.setItem('webzineToken',response.data.result);
+
+                            //세션스토리지에 토큰값 저장하기
+                            //브라우저를 닫으면 세션스토리지값이 삭제됩니다.
+                            //해당 웹사이트를 사용하다가 모든 브라우저를 닫으면 재로그인 하게할떄
+                            //sessionStorage.setItem('webzineToken',response.data.result);
+
+                            location.href = "/users/profile.html";
+                        }else{
+                            //서버에서 전달된 에러 메시지 출력
+                            alert(response.data.message);
+                        }
+    
+                    }.bind(this))
+                    .catch(function(err){
+                        console.log(err);
+                    })
+                }
+            }
+    
+        });
+    
+    </script>
+
+
+
+
+</body>
+
+</html>

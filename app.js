@@ -4,6 +4,10 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+//env파일 임포트 및 설정처리
+require('dotenv').config();
+
+
 //CORS 팩키지 모듈 임포트
 var cors = require('cors');
 
